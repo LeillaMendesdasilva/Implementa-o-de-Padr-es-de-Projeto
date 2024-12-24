@@ -1,0 +1,32 @@
+# Metaclasse para implementar o padrão Singleton
+class SingletonMeta(type):
+    # Dicionário para armazenar instâncias únicas de cada classe
+    _instances = {}
+
+    def __call__(cls, *args, **kwargs):
+        # Verifica se já existe uma instância da classe
+        if cls not in cls._instances:
+            # Cria uma nova instância da classe
+            instance = super().__call__(*args, **kwargs)
+            # Armazena a instância no dicionário
+            cls._instances[cls] = instance
+        # Retorna a instância única (existente ou recém-criada)
+        return cls._instances[cls]
+
+
+# Classe que utiliza a metaclasse SingletonMeta
+class Singleton(metaclass=SingletonMeta):
+    def __init__(self, value):
+        # Inicializa a instância com o valor fornecido
+        self.value = value
+
+
+# Uso do Singleton
+singleton1 = Singleton("First Instance")  # Cria a primeira (e única) instância
+singleton2 = Singleton("Second Instance")  # Retorna a mesma instância
+
+# Exibe o valor armazenado na instância
+print(singleton1.value)  # Output: First Instance
+
+# Verifica se singleton1 e singleton2 são a mesma instância
+print(singleton1 is singleton2)  # Output: True
