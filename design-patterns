@@ -1,1 +1,56 @@
+c# Classe base para o sujeito (ou objeto observado)
+class Subject:
+    def __init__(self):
+        # Inicializa uma lista para armazenar os observadores registrados
+        self._observers = []
 
+    def attach(self, observer):
+        # Adiciona um observador à lista de observadores
+        self._observers.append(observer)
+
+    def detach(self, observer):
+        # Remove um observador da lista de observadores
+        self._observers.remove(observer)
+
+    def notify(self):
+        # Notifica todos os observadores registrados sobre uma mudança de estado
+        for observer in self._observers:
+            observer.update(self)  # Chama o método 'update' de cada observador
+
+
+# Classe que representa um observador concreto
+class ConcreteObserver:
+    def update(self, subject):
+        # Define o comportamento do observador ao ser notificado
+        print(f"Observer notified with state: {subject.state}")
+
+
+# Classe que representa uma implementação concreta do sujeito
+class ConcreteSubject(Subject):
+    def __init__(self):
+        # Inicializa a classe base Subject e define o estado inicial
+        super().__init__()
+        self._state = None  # Estado inicial do sujeito
+
+    @property
+    def state(self):
+        # Getter para acessar o estado do sujeito
+        return self._state
+
+    @state.setter
+    def state(self, value):
+        # Setter para modificar o estado do sujeito
+        self._state = value
+        self.notify()  # Notifica os observadores sobre a mudança de estado
+
+
+# Uso do padrão Observer
+subject = ConcreteSubject()  # Cria uma instância do sujeito observado
+observer1 = ConcreteObserver()  # Cria o primeiro observador
+observer2 = ConcreteObserver()  # Cria o segundo observador
+
+subject.attach(observer1)  # Registra o primeiro observador no sujeito
+subject.attach(observer2)  # Registra o segundo observador no sujeito
+
+# Atualiza o estado do sujeito; isso notificará todos os observadores
+subject.state = "New State"
