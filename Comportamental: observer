@@ -1,4 +1,4 @@
-c# Classe base para o sujeito (ou objeto observado)
+# Classe base para o sujeito (ou objeto observado)
 class Subject:
     def __init__(self):
         # Inicializa uma lista para armazenar os observadores registrados
