@@ -1,0 +1,31 @@
+# Define a interface esperada pelo cliente
+class Target:
+    def request(self):
+        # Método padrão que retorna um comportamento genérico
+        return "Target: Default behavior."
+
+
+# Representa a classe existente que precisa ser adaptada
+class Adaptee:
+    def specific_request(self):
+        # Método que retorna um comportamento específico da classe Adaptee
+        return "Adaptee: Specific behavior."
+
+
+# Adapta a interface de Adaptee para ser compatível com Target
+class Adapter(Target):
+    def __init__(self, adaptee):
+        # Recebe uma instância de Adaptee para adaptação
+        self.adaptee = adaptee
+
+    def request(self):
+        # Sobrescreve o método request para traduzir o comportamento de Adaptee
+        return f"Adapter: (TRANSLATED) {self.adaptee.specific_request()}"
+
+
+# Uso do Adapter
+adaptee = Adaptee()  # Cria uma instância de Adaptee
+adapter = Adapter(adaptee)  # Cria uma instância de Adapter, adaptando Adaptee
+
+# Chama o método request do Adapter, que traduz o comportamento do Adaptee
+print(adapter.request())  # Output: Adapter: (TRANSLATED) Adaptee: Specific behavior.
