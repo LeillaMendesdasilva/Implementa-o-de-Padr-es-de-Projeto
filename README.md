@@ -27,4 +27,11 @@ Padrões de projeto diferem por sua complexidade, nível de detalhes, e escala d
 -   Diagrama UML:
    
 **Estrutural: Adapter**
+
+- Problema: Permite que objetos com interfaces incompatíveis trabalhem juntos.
+
+- Solução: Converte a interface de uma classe em outra que o cliente espera.
+
+- Diagrama UML:
+
   
